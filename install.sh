@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Install CyberVault from the latest GitHub release.
 #
-#   curl -fsSL https://raw.githubusercontent.com/darkstardevx/cybervault/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/cybercore-tech/cybervault/main/install.sh | sh
 #
 # Supported: Linux (x86_64, aarch64) and macOS (x86_64, aarch64).
 set -eu
 
-REPO="darkstardevx/cybervault"
+REPO="cybercore-tech/cybervault"
 INSTALL_DIR="${CYBERVAULT_INSTALL_DIR:-$HOME/.local/bin}"
 
 die() {
