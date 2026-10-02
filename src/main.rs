@@ -324,21 +324,19 @@ fn main() -> ExitCode {
     let path = args.path.unwrap_or_else(default_vault_path);
 
     let vault_status = cybercore::status::ToolStatus {
-        schema_version: 1,
+        schema_version: cybercore::status::SCHEMA_VERSION,
         tool: "cybervault".to_string(),
-        version: "0.1.0".to_string(),
-        host: hostname::get().map(|h| h.to_string_lossy().into_owned()).unwrap_or_else(|_| "localhost".to_string()),
-        updated_at: chrono::Utc::now().to_rfc3339(),
+        version: env!("CARGO_PKG_VERSION").to_string(),
+        host: cybercore::status::hostname(),
+        updated_at: cybercore::status::now_rfc3339(),
         health: cybercore::status::Health::Ok,
         summary: "Encrypted secrets vault operational".to_string(),
         metrics: vec![],
         events: vec![],
-        actions: vec![
-            cybercore::status::Action {
-                label: "Open Vault TUI".to_string(),
-                argv: vec!["cybervault".to_string()],
-            },
-        ],
+        actions: vec![cybercore::status::Action {
+            label: "Open Vault TUI".to_string(),
+            argv: vec!["cybervault".to_string()],
+        }],
     };
     let _ = cybercore::status::write(&vault_status);
 
